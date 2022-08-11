@@ -1,0 +1,9 @@
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\PruebaNewTechBlazor.exe
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\appsettings.Development.json
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\appsettings.json
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\PruebaNewTechBlazor.dll
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\PruebaNewTechBlazor.deps.json
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\PruebaNewTechBlazor.runtimeconfig.json
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\PruebaNewTechBlazor.pdb
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\Blazored.Toast.dll
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Release\net6.0\publish\Microsoft.AspNetCore.Blazor.HttpClient.dll

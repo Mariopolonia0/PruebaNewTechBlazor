@@ -1,0 +1,158 @@
+﻿@page "/counter"
+@using System.Net.Http.Headers
+@using Models
+
+@inject IBooksService BooksService
+@inject IToastService toastService
+
+<PageTitle>Formulario Books</PageTitle>
+
+<EditForm Model="book">
+
+    <div class="card">
+
+        <div class="card-header">
+            <h4>Formulario Books</h4>
+        </div>
+
+        <div class="card-body">
+            <div class="p-2 row row-cols-auto align-items-center">
+                <label class="col">Book Id</label>
+                <InputNumber class="col align-self-start-center " @bind-Value="book.BookId" />
+                <button @onclick="Buscar" class="col align-self-start-center  btn btn-primary">
+                    <i class="oi oi-magnifying-glass" />
+                </button>
+            </div>
+            <div class="p-2  row row-cols-auto">
+                <label class="col">Nombre</label>
+                <InputText class="col align-self-start-center" @bind-Value="book.Nombre" />
+            </div>
+            <div class="p-2  row row-cols-auto">
+                <label class="col">Nombre del autor</label>
+                <InputText class="col align-self-start-center" @bind-Value="book.NombreAutor" />
+            </div>
+            <div class="p-2 row row-cols-auto">
+                <label class="col">Edicion</label>
+                <InputText class="col align-self-start-center" @bind-Value="book.Edicion" />
+            </div>
+            <div class="p-2 row row-cols-auto">
+                <label class="">Precio</label>
+                <InputNumber class="col align-self-start-center" @bind-Value="@book.Precio"
+                    @oninput="@((b) => @book.Precio = Convert.ToDecimal(b.Value))" />
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-center">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" @onclick="Nuevo"> <i class="oi oi-file" /> Nuevo</button>
+                <button type="submit" class="btn btn-success" @onclick="Guardar"> <i class="oi oi-document" />
+                    Guardar</button>
+                <button type="button" class="btn btn-danger" @onclick="Eliminar"><i class="oi oi-trash" />
+                    Eliminar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <BlazoredToasts />
+</EditForm>
+
+@code {
+    public Book book { get; set; } = new Book();
+    List<Book> BooksList = new List<Book>();
+        
+    protected async override Task OnInitializedAsync()
+    {
+        BooksList = (await BooksService!.GetBooks()).ToList();
+    }
+
+
+    async void Buscar()
+    {
+        try
+        {
+            if (book.BookId == 0)
+                toastService.ShowError("Book Id es igual a 0");
+            else
+                book = (await BooksService!.GetBooksId(book.BookId));
+
+            toastService.ShowInfo("Encotrado");
+        }
+        catch (Exception exe)
+        {
+            toastService.ShowError("Book Id " + book.BookId + " no existe");
+        }
+    }
+
+    void Nuevo()
+    {
+        book = new Book();
+    }
+
+    async void Eliminar()
+    {
+        if (Validad())
+        {
+            try
+            {
+                if (BooksList.Any(b => b.BookId == book.BookId))
+                    await BooksService!.DeleteBooksId(book);
+                else
+                    toastService.ShowError("Book no existe");
+
+                Nuevo();
+                toastService!.ShowInfo("Eliminado");
+                BooksList = (await BooksService!.GetBooks()).ToList();
+            }
+            catch (Exception exe)
+            {
+                toastService.ShowError("Error :" + exe.ToString());
+            }
+
+             
+        }
+        else
+            toastService.ShowError("Faltan dato por digital para poder eliminar");
+    }
+
+    async void Guardar()
+    {
+        if (Validad())
+        {
+            try
+            {
+                if (BooksList.Any(b => b.BookId == book.BookId))
+                    await BooksService!.PutBooks(book);
+                else
+                    await BooksService!.PostBooks(book);
+
+                Nuevo();
+                toastService.ShowInfo("Guardado");
+                BooksList = (await BooksService!.GetBooks()).ToList();
+            }
+            catch (Exception exe)
+            {
+                toastService.ShowError("Error :" + exe.ToString());
+            }
+        }
+        else
+            toastService.ShowError("Faltan dato por digital");
+
+    }
+
+    bool Validad()
+    {
+        if (book.BookId <= 0)
+            return false;
+        if (book.Nombre.Length == 0)
+            return false;
+        if (book.NombreAutor.Length == 0)
+            return false;
+        if (book.Edicion.Length == 0)
+            return false;
+        if (book.Precio == 0)
+            return false;
+        else
+            return true;
+    }
+}

@@ -1,0 +1,4 @@
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Debug\net6.0\PruebaNewTechBlazor.dll
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Debug\net6.0\PruebaNewTechBlazor.pdb
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Debug\net6.0\Microsoft.AspNetCore.Blazor.HttpClient.dll
+C:\Users\Mario\source\repos\PruebaNewTech\PruebaNewTechBlazor\bin\Debug\net6.0\Blazored.Toast.dll
