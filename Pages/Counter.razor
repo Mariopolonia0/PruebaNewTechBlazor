@@ -57,10 +57,10 @@ else
                 </div>
             </div>
         </div>
-       
+
     </EditForm>
 }
- <BlazoredToasts />
+<BlazoredToasts />
 
 
 
@@ -81,17 +81,14 @@ else
             else
             {
                 book = await (BooksService!.GetBooksId(book.BookId));
-                if (book != null)
-                    toastService.ShowInfo("Encontrado");
-                else
-                    toastService.ShowError("Error");
+                toastService.ShowInfo("Encontrado");               
             }
         }
         catch (Exception exe)
         {
             toastService.ShowError("Book Id " + book.BookId + " no existe");
+            Nuevo();
         }
-
     }
 
     void Nuevo()

@@ -45,6 +45,39 @@
         }
       },
       {
+        "HashCode": -144552447,
+        "Kind": "Components.Component",
+        "Name": "PruebaNewTechBlazor.Pages.Index",
+        "AssemblyName": "PruebaNewTechBlazor",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "PruebaNewTechBlazor.Pages.Index"
+        }
+      },
+      {
+        "HashCode": 949768141,
+        "Kind": "Components.Component",
+        "Name": "PruebaNewTechBlazor.Pages.Index",
+        "AssemblyName": "PruebaNewTechBlazor",
+        "CaseSensitive": true,
+        "TagMatchingRules": [
+          {
+            "TagName": "PruebaNewTechBlazor.Pages.Index"
+          }
+        ],
+        "Metadata": {
+          "Runtime.Name": "Components.IComponent",
+          "Common.TypeName": "PruebaNewTechBlazor.Pages.Index",
+          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
+        }
+      },
+      {
         "HashCode": 666020456,
         "Kind": "Components.Component",
         "Name": "PruebaNewTechBlazor.Pages.Counter",
@@ -94,39 +127,6 @@
         "Metadata": {
           "Runtime.Name": "Components.IComponent",
           "Common.TypeName": "PruebaNewTechBlazor.Pages.Counter",
-          "Components.NameMatch": "Components.FullyQualifiedNameMatch"
-        }
-      },
-      {
-        "HashCode": -144552447,
-        "Kind": "Components.Component",
-        "Name": "PruebaNewTechBlazor.Pages.Index",
-        "AssemblyName": "PruebaNewTechBlazor",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "PruebaNewTechBlazor.Pages.Index"
-        }
-      },
-      {
-        "HashCode": 949768141,
-        "Kind": "Components.Component",
-        "Name": "PruebaNewTechBlazor.Pages.Index",
-        "AssemblyName": "PruebaNewTechBlazor",
-        "CaseSensitive": true,
-        "TagMatchingRules": [
-          {
-            "TagName": "PruebaNewTechBlazor.Pages.Index"
-          }
-        ],
-        "Metadata": {
-          "Runtime.Name": "Components.IComponent",
-          "Common.TypeName": "PruebaNewTechBlazor.Pages.Index",
           "Components.NameMatch": "Components.FullyQualifiedNameMatch"
         }
       },
