@@ -7,81 +7,91 @@
 
 <PageTitle>Formulario Books</PageTitle>
 
-<EditForm Model="book">
+@if (book == null)
+{
+    <p><em>Loading</em></p>
+}
+else
+{
+    <EditForm Model="@book">
 
-    <div class="card">
+        <div class="card">
 
-        <div class="card-header">
-            <h4>Formulario Books</h4>
+            <div class="card-header">
+                <h4>Formulario Books</h4>
+            </div>
+
+            <div class="card-body">
+                <div class="p-2 row row-cols-auto align-items-center">
+                    <label class="col">Book Id</label>
+                    <InputNumber class="col align-self-start-center " @bind-Value="@book.BookId" />
+                    <button @onclick="Buscar" class="col align-self-start-center  btn btn-primary">
+                        <i class="oi oi-magnifying-glass" />
+                    </button>
+                </div>
+                <div class="p-2  row row-cols-auto">
+                    <label class="col">Nombre</label>
+                    <InputText class="col align-self-start-center" @bind-Value="@book.Nombre" />
+                </div>
+                <div class="p-2  row row-cols-auto">
+                    <label class="col">Nombre del autor</label>
+                    <InputText class="col align-self-start-center" @bind-Value="@book.NombreAutor" />
+                </div>
+                <div class="p-2 row row-cols-auto">
+                    <label class="col">Edicion</label>
+                    <InputText class="col align-self-start-center" @bind-Value="@book.Edicion" />
+                </div>
+                <div class="p-2 row row-cols-auto">
+                    <label class="">Precio</label>
+                    <InputNumber class="col align-self-start-center" @bind-Value="@book.Precio"
+                    @oninput="@((b) => book.Precio = Convert.ToDecimal(b.Value))" />
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" @onclick="Nuevo"> <i class="oi oi-file" /> Nuevo</button>
+                    <button type="submit" class="btn btn-success" @onclick="Guardar"> <i
+                        class="oi oi-document" />Guardar</button>
+                    <button type="button" class="btn btn-danger" @onclick="Eliminar"><i
+                        class="oi oi-trash" />Eliminar</button>
+                </div>
+            </div>
         </div>
-
-        <div class="card-body">
-            <div class="p-2 row row-cols-auto align-items-center">
-                <label class="col">Book Id</label>
-                <InputNumber class="col align-self-start-center " @bind-Value="book.BookId" />
-                <button @onclick="Buscar" class="col align-self-start-center  btn btn-primary">
-                    <i class="oi oi-magnifying-glass" />
-                </button>
-            </div>
-            <div class="p-2  row row-cols-auto">
-                <label class="col">Nombre</label>
-                <InputText class="col align-self-start-center" @bind-Value="book.Nombre" />
-            </div>
-            <div class="p-2  row row-cols-auto">
-                <label class="col">Nombre del autor</label>
-                <InputText class="col align-self-start-center" @bind-Value="book.NombreAutor" />
-            </div>
-            <div class="p-2 row row-cols-auto">
-                <label class="col">Edicion</label>
-                <InputText class="col align-self-start-center" @bind-Value="book.Edicion" />
-            </div>
-            <div class="p-2 row row-cols-auto">
-                <label class="">Precio</label>
-                <InputNumber class="col align-self-start-center" @bind-Value="@book.Precio"
-                    @oninput="@((b) => @book.Precio = Convert.ToDecimal(b.Value))" />
-            </div>
-        </div>
-        <div class="card-footer d-flex justify-content-center">
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-primary" @onclick="Nuevo"> <i class="oi oi-file" /> Nuevo</button>
-                <button type="submit" class="btn btn-success" @onclick="Guardar"> <i class="oi oi-document" />
-                    Guardar</button>
-                <button type="button" class="btn btn-danger" @onclick="Eliminar"><i class="oi oi-trash" />
-                    Eliminar</button>
-            </div>
-        </div>
-
-    </div>
+       
+    </EditForm>
+}
+ <BlazoredToasts />
 
 
-    <BlazoredToasts />
-</EditForm>
 
 @code {
-    public Book book { get; set; } = new Book();
+    [Parameter] public Book book { get; set; } = new Book();
     List<Book> BooksList = new List<Book>();
-        
     protected async override Task OnInitializedAsync()
     {
         BooksList = (await BooksService!.GetBooks()).ToList();
     }
 
-
-    async void Buscar()
+    async Task Buscar()
     {
         try
         {
             if (book.BookId == 0)
                 toastService.ShowError("Book Id es igual a 0");
             else
-                book = (await BooksService!.GetBooksId(book.BookId));
-
-            toastService.ShowInfo("Encotrado");
+            {
+                book = await (BooksService!.GetBooksId(book.BookId));
+                if (book != null)
+                    toastService.ShowInfo("Encontrado");
+                else
+                    toastService.ShowError("Error");
+            }
         }
         catch (Exception exe)
         {
             toastService.ShowError("Book Id " + book.BookId + " no existe");
         }
+
     }
 
     void Nuevo()
@@ -89,7 +99,7 @@
         book = new Book();
     }
 
-    async void Eliminar()
+    async Task Eliminar()
     {
         if (Validad())
         {
@@ -108,14 +118,12 @@
             {
                 toastService.ShowError("Error :" + exe.ToString());
             }
-
-             
         }
         else
-            toastService.ShowError("Faltan dato por digital para poder eliminar");
+            toastService.ShowError("Faltan datos por digital para poder eliminar");
     }
 
-    async void Guardar()
+    async Task Guardar()
     {
         if (Validad())
         {
@@ -136,8 +144,7 @@
             }
         }
         else
-            toastService.ShowError("Faltan dato por digital");
-
+            toastService.ShowError("Faltan datos por digital");
     }
 
     bool Validad()

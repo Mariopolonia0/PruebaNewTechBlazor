@@ -18,16 +18,17 @@ namespace PruebaNewTechBlazor.Pages
             BooksList = (await BooksService!.GetBooks()).ToList();
         }
 
-        public async void Buscar()
+        public async Task Buscar()
         {
             try
             {
-                BooksList = new List<Book> {(await BooksService!.GetBooksId(BookId))};
-                ToastService!.ShowInfo("encontrado");
+                BooksList = new List<Book>();
+                BooksList.Add(await (BooksService!.GetBooksId(BookId)));
+                ToastService!.ShowInfo("Book encontrado");
             }
             catch (Exception exe)
             {
-                ToastService!.ShowError("No se encotro el Book Id "+ BookId.ToString());
+                ToastService!.ShowError("No se encontró el Book Id " + BookId.ToString());
             }
         }
     }

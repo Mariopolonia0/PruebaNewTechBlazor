@@ -1,10 +1,8 @@
 ﻿@page "/"
 @inherits BookBase
-@inject IToastService toastService
 <PageTitle>Lista de Books</PageTitle>
 
-<EditForm Model="this">
-
+<EditForm Model="this" OnInvalidSubmit = "Buscar">
     <div class="card">
 
         <div class="card-header">
@@ -32,10 +30,10 @@
                     <th>Precio</th>
                 </tr>
             </thead>
-            @if (BooksList != null)
+            @if (@BooksList != null)
             {
                 <tbody>
-                    @foreach (var book in BooksList!)
+                    @foreach (var book in @BooksList!)
                     {
                         <tr>
                             <td>@book.BookId</td>
@@ -50,7 +48,7 @@
             else
             {
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10"
+                    <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="10"
                     aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             }

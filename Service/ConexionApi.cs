@@ -5,16 +5,12 @@ namespace PruebaNewTechBlazor.Service
 {
     public class ConexionApi : IBooksService
     {
-        private readonly HttpClient httpClient;
+        public readonly HttpClient httpClient;
 
         public ConexionApi(HttpClient httpClient)
         {
             this.httpClient = httpClient;
-        }
-
-        public Task<Book> DeleteBooksId(int id)
-        {
-            throw new NotImplementedException();
+            
         }
 
         public Task DeleteBooksId(Book book)
@@ -39,8 +35,12 @@ namespace PruebaNewTechBlazor.Service
        
         public async Task<Book> PutBooks(Book book)
         {
-            await httpClient.PutJsonAsync($"api/Books/{book.BookId}",book);
+            await httpClient.PutAsJsonAsync($"api/Books/{book.BookId}",book);
             return book;
         }
+
+        
+
+        
     }
 }
