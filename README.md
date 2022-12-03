@@ -1,10 +1,10 @@
 # PruebaNewTechBlazor
-##Entidades
-###bookId
-###nombre
-###nombreAutor
-###edicion
-###Precio
+## Entidades
+### bookId
+### nombre
+### nombreAutor
+### edicion
+### Precio
 
 ENLACE DEL HOSTING: https://pruebanewtechweb.azurewebsites.net/
 ------------------
