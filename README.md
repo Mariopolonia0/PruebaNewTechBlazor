@@ -1,4 +1,4 @@
-# PruebaNewTechBlazor
+# Control de libro
 ## Entidades
 ### bookId
 ### nombre
